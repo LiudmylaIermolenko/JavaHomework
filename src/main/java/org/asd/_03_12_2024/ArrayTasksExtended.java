@@ -83,6 +83,9 @@ public class ArrayTasksExtended {
     // 21. Упорядочить массив по возрастанию.
     public static void task21() {
         int[] array = {4, 2, 7, 1, 3};
+
+//        Arrays.sort(array);
+
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array.length - 1; j++) {
                 if (array[j] > array[j + 1]) {
@@ -92,8 +95,12 @@ public class ArrayTasksExtended {
                 }
             }
         }
-        System.out.println(Arrays.toString(array));
+//        System.out.println(Arrays.toString(array));
+        System.out.print("Отсортированный массив: ");
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i] + " ");
 
+        }
     }
 
     // 22. Найти индекс первого отрицательного элемента.
@@ -156,31 +163,35 @@ public class ArrayTasksExtended {
         int[] array = {1, 2, 2, 3, 4, 4, 5};
         int count = 0;
         for (int i = 0; i < array.length; i++) {
+            boolean isUnique = true;
             for (int j = 0; j < array.length; j++) {
-                if (i != j && array[i] == array[j])
+                if (i != j && array[i] == array[j]) {
+                    isUnique = false;// Найдено совпадение
                     break;
-                if (j == array.length - 1) {
+                }
+            }
+
+                // Если элемент уникален, увеличиваем счётчик
+                if (isUnique) {
                     count++;
                 }
             }
-        }
         System.out.println(count);
     }
 
     // 27. Переставить минимальный элемент массива в начало.
     public static void task27() {
         int[] array = {3, 2, 1, 4, 5};
-        int min = 0;
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] < array[min]) {
-                min = i;
+        int minInd = 0;
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] < array[minInd]) {
+                minInd = i;
             }
         }
-        if (min != 0) {
-            int temp = array[min];
-            array[min] = array[0];
-            array[0] = temp;
-        }
+            int temp = array[0];
+            array[0] = array[minInd];
+            array[minInd] = temp;
+
         System.out.println(Arrays.toString(array));
     }
 
@@ -214,8 +225,7 @@ public class ArrayTasksExtended {
         for (int i = 0; i < array.length; i++) {
             if (!foundFirstNegative && array[i] < 0) {
                 foundFirstNegative = true;
-            } else if (foundFirstNegative) {
-                if (array[i] > 0)
+            } else if (foundFirstNegative && array[i] > 0) {
                     sum += array[i];
             }
 

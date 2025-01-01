@@ -1,34 +1,25 @@
 package org.asd._17_12_2024;
 
-public class Figure {
+abstract class Figure {
     String name;
     String color;
 
-public double calcSquare() {
-    return 0;
-
-}
-
-    public static void main(String[] args) {
-    Triangle triangle = new Triangle(2, 3, 2);
-    triangle.calcSquare();
-
-    Square square = new Square(4);
-    square.calcSquare();
-
-    Circle circle = new Circle(3);
-    circle.calcSquare();
-
-
+    public Figure(String name, String color) {
+        this.name = name;
+        this.color = color;
     }
-}
+
+    public abstract double calcSquare();
+    }
+
 
 class Triangle extends Figure{
     int side;
     int base;
     int height;
 
-    public Triangle(int side, int base, int height) {
+    public Triangle(String name, String color, int side, int base, int height) {
+        super(name, color);
         this.side = side;
         this.base = base;
         this.height = height;
@@ -37,7 +28,6 @@ class Triangle extends Figure{
     @Override
     public double calcSquare() {
         double sTriangle = 0.5 * this.base * this.height;
-        System.out.println(sTriangle);
         return sTriangle;
     }
 
@@ -47,21 +37,31 @@ class Triangle extends Figure{
                 "side=" + side +
                 ", base=" + base +
                 ", height=" + height +
+                ", name='" + name + '\'' +
+                ", color='" + color + '\'' +
                 '}';
     }
+//    @Override
+//    public String toString() {
+//        return "Triangle{" +
+//                "side=" + side +
+//                ", base=" + base +
+//                ", height=" + height +
+//                '}';
+//    }
 }
 
 class Square extends Figure{
     int side;
 
-    public Square(int side) {
+    public Square(String name, String color, int side) {
+        super(name, color);
         this.side = side;
     }
 
     @Override
     public double calcSquare() {
         double sSquare = this.side*this.side;
-        System.out.println(sSquare);
         return sSquare;
     }
 
@@ -69,28 +69,45 @@ class Square extends Figure{
     public String toString() {
         return "Square{" +
                 "side=" + side +
+                ", name='" + name + '\'' +
+                ", color='" + color + '\'' +
                 '}';
     }
+//    @Override
+//    public String toString() {
+//        return "Square{" +
+//                "side=" + side +
+//                '}';
+//    }
 }
 
 class Circle extends Figure{
     int radius;
 
-    public Circle(int radius) {
+    public Circle(String name, String color, int radius) {
+        super(name, color);
         this.radius = radius;
     }
 
     @Override
     public double calcSquare() {
         double sCircle = Math.PI * this.radius * this.radius;
-        System.out.println(sCircle);
         return sCircle;
     }
+
+//    @Override
+//    public String toString() {
+//        return "Circle{" +
+//                "radius=" + radius +
+//                '}';
+//    }
 
     @Override
     public String toString() {
         return "Circle{" +
                 "radius=" + radius +
+                ", name='" + name + '\'' +
+                ", color='" + color + '\'' +
                 '}';
     }
 }

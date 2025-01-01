@@ -130,6 +130,7 @@ public class ArrayTasks {
         for (int i = 0; i < array.length; i++) {
             sum = sum + array[i];
 
+
         }
         System.out.println(sum / array.length);
 
@@ -145,7 +146,7 @@ public class ArrayTasks {
         int avg = sum / array.length;
         for (int i = 0; i < array.length; i++) {
             if (array[i] > avg) {
-                System.out.println(sum);
+                System.out.println(array[i]);
             }
 
         }
@@ -154,13 +155,21 @@ public class ArrayTasks {
 
     // 13. Проверить, упорядочен ли массив по возрастанию.
     public static void task13() {
-        int[] array = {1, 2, 3, 4};
-        int[] copyArray = array.clone();
-        Arrays.sort(copyArray);
-        if (Arrays.equals(copyArray, array)) {
-            System.out.println("Equal");
+        int[] array = {1, 2, 5, 4};
+        // Метод для проверки
+        boolean isSorted = true;
+        for (int i = 0; i < array.length - 1; i++) {
+            if (array[i] > array[i + 1]) {
+                isSorted = false;
+                break; // Прекращаем проверку, если массив не упорядочен
+            }
+        }
+
+        // Вывод результата
+        if (isSorted) {
+            System.out.println("Массив упорядочен по возрастанию.");
         } else {
-            System.out.println("Not equal");
+            System.out.println("Массив не упорядочен по возрастанию.");
         }
     }
 
@@ -184,9 +193,9 @@ public class ArrayTasks {
 
 
     }
-    public static void main(String[] args) {
-       task15();
-    }
+//    public static void main(String[] args) {
+//       task15();
+//    }
     // 15. Переставить элементы массива в обратном порядке.
     public static void task15() {
         int[] array = {1, 2, 3, 4};
@@ -196,6 +205,9 @@ public class ArrayTasks {
             array[array.length - i - 1] = temp;
         }
         System.out.println(Arrays.toString(array));
+    }
+    public static void main(String[] args) {
+        task14();
     }
 
 }

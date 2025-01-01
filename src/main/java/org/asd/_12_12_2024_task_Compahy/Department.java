@@ -11,10 +11,6 @@ public class Department {
         this.employees = employees;
     }
 
-//    public void  empl(Department department, Employee employee) {
-//        Employee[] employees1 = department.employees;
-//}
-
 
     public String getName() {
         return name;
