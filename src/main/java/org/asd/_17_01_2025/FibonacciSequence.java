@@ -1,48 +1,47 @@
 package org.asd._17_01_2025;
 
 public class FibonacciSequence {
- private int length;
+    private int length;
 
-    // Конструктор по умолчанию
-    public FibonacciSequence(){
+    public FibonacciSequence() {
+        this.length = 0;
     }
 
-    // Конструктор с параметром
     public FibonacciSequence(int length) {
-        this.length = length;
+        setLength(length); // Вызываем метод setLength для проверки
     }
-    // Геттер для длины
+
     public int getLength() {
         return length;
     }
-    // Сеттер для длины с проверкой
+
     public void setLength(int length) {
-        if (length<0){
-            System.out.println("Mistake!");
+        if (length < 0) {
+            System.out.println("Mistake! Length cannot be negative.");
+            this.length = 0; // Устанавливаем длину в 0
+        } else {
+            this.length = length; // Устанавливаем длину, если она не отрицательная
         }
-        this.length = length;
     }
 
-    // Метод через цикл for
     public int[] getFibonacciFor() {
+        if (length == 0) {
+            return new int[0];
+        }
         int[] array = new int[length];
-
-        // Инициализация первых двух элементов
         array[0] = 0;
-        array[1] = 1;
+        if (length > 1) array[1] = 1;
         for (int i = 2; i < length; i++) {
             array[i] = array[i - 1] + array[i - 2];
         }
         return array;
     }
 
-    // Метод через цикл while
     public int[] getFibonacciWhile() {
+        if (length == 0) return new int[0];
         int[] array = new int[length];
-
-        // Инициализация первых двух элементов
         array[0] = 0;
-        array[1] = 1;
+        if (length > 1) array[1] = 1;
         int i = 2;
         while (i < length) {
             array[i] = array[i - 1] + array[i - 2];
@@ -51,13 +50,11 @@ public class FibonacciSequence {
         return array;
     }
 
-    // Метод через цикл do-while
     public int[] getFibonacciDoWhile() {
+        if (length == 0) return new int[0];
         int[] array = new int[length];
-
-        // Инициализация первых двух элементов
         array[0] = 0;
-        array[1] = 1;
+        if (length > 1) array[1] = 1;
         int i = 2;
         do {
             if (i >= length) break;
@@ -68,7 +65,6 @@ public class FibonacciSequence {
         return array;
     }
 }
-
 
 
 //Написать класс FibonacciSequence, в котором есть поле length - длинна
