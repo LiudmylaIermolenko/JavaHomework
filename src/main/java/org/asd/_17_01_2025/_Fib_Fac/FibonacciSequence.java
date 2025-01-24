@@ -1,4 +1,4 @@
-package org.asd._17_01_2025;
+package org.asd._17_01_2025._Fib_Fac;
 
 public class FibonacciSequence {
     private int length;
@@ -8,7 +8,7 @@ public class FibonacciSequence {
     }
 
     public FibonacciSequence(int length) {
-        setLength(length); // Вызываем метод setLength для проверки
+        setLength(length);
     }
 
     public int getLength() {
@@ -18,9 +18,9 @@ public class FibonacciSequence {
     public void setLength(int length) {
         if (length < 0) {
             System.out.println("Mistake! Length cannot be negative.");
-            this.length = 0; // Устанавливаем длину в 0
+            this.length = 0;
         } else {
-            this.length = length; // Устанавливаем длину, если она не отрицательная
+            this.length = length;
         }
     }
 
@@ -64,6 +64,24 @@ public class FibonacciSequence {
 
         return array;
     }
+//    public static int[] calculateFibonacci(int loopType, int n) {
+//        if (n < 0) {
+//            System.out.println("Ошибка: n не может быть отрицательным.");
+//            return new int[0];
+//        }
+//        FibonacciSequence fibonacci = new FibonacciSequence(n);
+//
+//        if (loopType == 1) {
+//            return fibonacci.getFibonacciWhile();
+//        } else if (loopType == 2) {
+//            return fibonacci.getFibonacciDoWhile();
+//        } else if (loopType == 3) {
+//            return fibonacci.getFibonacciFor();
+//        } else {
+//            System.out.println("Неверный loopType.");
+//            return new int[0];
+//        }
+//    }
 }
 
 
