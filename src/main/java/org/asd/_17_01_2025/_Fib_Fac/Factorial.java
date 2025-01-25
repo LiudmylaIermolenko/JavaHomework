@@ -1,7 +1,31 @@
 package org.asd._17_01_2025._Fib_Fac;
 
         public class Factorial {
-            public static int factorialWhile ( int n){
+
+            private int n;
+
+            public Factorial() {
+                this.n = 0;
+            }
+            public Factorial(int number) {
+                setNumber(number);
+            }
+
+            public int getNumber() {
+                return n;
+            }
+
+            public void setNumber(int number) {
+                if (number < 0){
+                    System.out.println("Mistake! Number cannot be negative.");
+                    this.n = 0;
+                } else {
+                this.n = number;
+            }
+        }
+
+
+            public int factorialWhile (){
             int result = 1, i = 1;
             while (i <= n) {
                 result *= i;
@@ -9,7 +33,7 @@ package org.asd._17_01_2025._Fib_Fac;
             }
             return result;
         }
-        public static int factorialDoWhile ( int n){
+        public int factorialDoWhile (){
             int result = 1, i = 1;
             do {
                 result *= i;
@@ -17,7 +41,7 @@ package org.asd._17_01_2025._Fib_Fac;
             } while (i <= n);
             return result;
         }
-        public static int factorialFor ( int n){
+        public int factorialFor (){
             int result = 1;
             for (int i = 1; i <= n; i++) {
                 result *= i;
@@ -25,18 +49,6 @@ package org.asd._17_01_2025._Fib_Fac;
             return result;
         }
 
-            //    public static int calculateFactorial(int loopType, int n) {
-//        if (loopType == 1) {
-//            return factorialWhile(n); // Цикл while
-//        } else if (loopType == 2) {
-//            return factorialDoWhile(n); // Цикл do-while
-//        } else if (loopType == 3) {
-//            return factorialFor(n); // Цикл for
-//        } else {
-//            System.out.println("Неверный loopType.");
-//            return -1; // Ошибка
-//        }
-//    }
     }
 
 

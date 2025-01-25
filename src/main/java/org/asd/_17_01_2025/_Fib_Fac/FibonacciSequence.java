@@ -64,24 +64,6 @@ public class FibonacciSequence {
 
         return array;
     }
-//    public static int[] calculateFibonacci(int loopType, int n) {
-//        if (n < 0) {
-//            System.out.println("Ошибка: n не может быть отрицательным.");
-//            return new int[0];
-//        }
-//        FibonacciSequence fibonacci = new FibonacciSequence(n);
-//
-//        if (loopType == 1) {
-//            return fibonacci.getFibonacciWhile();
-//        } else if (loopType == 2) {
-//            return fibonacci.getFibonacciDoWhile();
-//        } else if (loopType == 3) {
-//            return fibonacci.getFibonacciFor();
-//        } else {
-//            System.out.println("Неверный loopType.");
-//            return new int[0];
-//        }
-//    }
 }
 
 
