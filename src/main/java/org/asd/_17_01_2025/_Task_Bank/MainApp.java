@@ -5,20 +5,21 @@ public class MainApp {
     public static void main(String[] args) {
         Card card1 = new Card("Pit", 5000);
 
-        BalanceDisplay.displayBalance(card1);
+        card1.displayBalance();
 
-        PowerCard.deposit(card1, 2000);
+        card1.deposit(2000);
 
-        PowerCard.getMoney(card1, 500);
+        card1.getMoney(500);
 
-        BalanceDisplay.displayBalanceInCurrency(card1, "Euro", 0.9);
-        BalanceDisplay.displayBalanceInCurrency(card1, "Pound", 0.7);
+        card1.displayBalanceInCurrency("Euro", 0.9);
+        card1.displayBalanceInCurrency("Pound", 0.7);
 
         Card card2 = new Card("Anna");
 
-        BalanceDisplay.displayBalance(card2);
+        card2.displayBalance();
 
     }
+
 }
 
 
