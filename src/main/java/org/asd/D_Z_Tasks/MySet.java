@@ -45,19 +45,18 @@ public class MySet {
 
     //Получить все возможные комбинации из Set<String> и Set<Integer>,
     // где каждая комбинация представляет собой строку и число, объединенные вместе.
-    public static Set<java.lang.String> getCombination(Set<java.lang.String> strings, Set<Integer> integers) {
-        Set<java.lang.String> result = new HashSet<>();
+    public static Set<String> getCombination(Set<String> strings, Set<Integer> integers) {
+        Set<String> result = new HashSet<>();
         for (Integer anInt : integers) {
-            for (java.lang.String str : strings) {
-                java.lang.String combination = str + anInt;
+            for (String str : strings) {
+                String combination = str + anInt;
                 result.add(combination);
             }
-
         }
         return result;
     }
 
-    public static void getUnique(java.lang.String string) {
+    public static void getUnique(String string) {
         Set<Character> result = new HashSet<>();
         for (int i = 0; i < string.length(); i++) {
             result.add(string.charAt(i));
@@ -90,7 +89,9 @@ public class MySet {
 }
 
 
-
+//Имеется два набора элементов Set. Создать Set, в котором бы находились: все элементы из двух наборов,
+// только общие для двух наборов элементы, только элементы, которые присутствуют в первом наборе
+// и отсутствуют во втором
 
 
 

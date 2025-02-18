@@ -17,7 +17,7 @@ public class CustomStack <T>{
 
     public T pop(){ //Удаляет и возвращает верхний элемент стека.
         if (data.isEmpty())
-            throw new NoSuchElementException();//Если стек пуст, выбрасывает NoSuchElementException.
+            throw new NoSuchElementException();
         return data.pop();
     }
 

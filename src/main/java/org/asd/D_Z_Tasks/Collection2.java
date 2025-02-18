@@ -33,24 +33,18 @@ public class Collection2 {
 
     }
 
-    //С помощью итератора:
+    //8.С помощью итератора:
     //a). Вывести имена, состоящие из 4 букв
     //Метод принимает один параметр – список строк strings (например, имена студентов) и возвращает
     // новый список, содержащий только те строки, у которых длина равна 4 симв
+    //Используется метод iterator() для получения объекта итератора,
+    // который позволяет пройти по всем элементам входного списка.
+
     private static List<String> findMoreThanFour(List<String> strings) {
-        //Создается пустой список result, в который мы будем
-        // добавлять имена, удовлетворяющие условию (длина равна 4)
-        List<String> result = new ArrayList<>();
-        //Используется метод iterator() для получения объекта итератора,
-        // который позволяет пройти по всем элементам входного списка.
+        List<String> result = new ArrayList<>();//будем добавлять имена(длина равна 4)
         Iterator<String> iterator = strings.iterator();
-        //Цикл while продолжается, пока итератор указывает на следующий элемент (iterator.hasNext() возвращает true).
-        //На каждой итерации вызывается iterator.next(), который
-        // возвращает следующий элемент списка и сохраняется в переменную s
         while (iterator.hasNext()) {
             String s = iterator.next();
-//           //Если оба условия выполнены, строка
-//           добавляется в результирующий список result с помощью result.add(s)
             if (s != null && s.length() == 4) {
                 result.add(s);
             }
@@ -60,10 +54,7 @@ public class Collection2 {
 
     //b). Удалить из списка null и пустые строки.
     public static void deleteNullAndEmpty(List<String> strings) {
-        //Получение итератора для списка:
-        //Используется метод iterator() для получения объекта итератора,
-        // который позволяет пройти по всем элементам входного списка.
-        Iterator<String> stringIterator = strings.iterator();
+        Iterator<String> stringIterator = strings.iterator();//метод iterator()позволяет пройти по всем элементам входного списка.
         while (stringIterator.hasNext()) {
             String s = stringIterator.next();
             if (s == null || s.isEmpty()) {
@@ -73,17 +64,14 @@ public class Collection2 {
         }
     }
 
-    //С помощью listIterator: вывести все элементы листа в обратном порядке.
+    //С) помощью listIterator: вывести все элементы листа в обратном порядке.
     public static List<String> reverseList(List<String> stringList) {
         //Получение итератора с позиции конца списка:
-        //Метод listIterator(int index) позволяет создать итератор, который начинает обход
-        // с заданного индекса.
         //Передавая stringList.size(), мы устанавливаем курсор итератора в конец
         // списка, что позволяет потом двигаться назад (метод hasPrevious() и previous()).
-        ListIterator<String> iterator = stringList.listIterator(stringList.size());
+        ListIterator<String> iterator = stringList.listIterator(stringList.size());//Метод listIterator(int index) начинает обход с заданного индекса.
         List<String> result = new ArrayList<>();
-        //Обход списка в обратном порядке:
-        while (iterator.hasPrevious()) {
+        while (iterator.hasPrevious()) {//Обход списка в обратном порядке:
             result.add(iterator.previous());
         }
         return result;
@@ -95,21 +83,16 @@ public class Collection2 {
         while (listIterator.hasPrevious()) {
             if (listIterator.previous().startsWith("T")) {
                 listIterator.remove();
-                //public static void removeNamesStartTfromList(List<String> stringList) {
-                //    ListIterator<String> listIterator = stringList.listIterator(stringList.size());
+
                 //    while (listIterator.hasPrevious()) {
                 //        String str = listIterator.previous();
                 //        if (str != null && str.startsWith("T")) {
                 //            listIterator.remove();
-                //        }
-                //    }
-                //}
             }
         }
-
     }
 
-    //Заменить в списке "Ann" на "student Ann"
+    //e.Заменить в списке "Ann" на "student Ann"
     private static void replaceStr(List<String> stringList) {
         ListIterator<String> listIterator = stringList.listIterator(stringList.size());
         while (listIterator.hasPrevious()) {

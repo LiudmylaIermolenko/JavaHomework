@@ -7,7 +7,7 @@ public class Collection {
     public static void main(String[] args) {
 
 
-        List<String> strings = new ArrayList<>(List.of("AAA", "BBBBB", "CCCCCCC"));
+        List<String> strings = new ArrayList<>(List.of("AAA", "BBBBB", "AAA", "CCCCCCC"));
         System.out.println(countChars(strings));
         System.out.println(newListStrMoreThreeElem(strings));
 
@@ -20,6 +20,7 @@ public class Collection {
 
         System.out.println(findAllMultiple(integers, 2));
         System.out.println(isSorted(integers));
+        System.out.println(findDuplicates(strings));
 
 // Пример для задач со строками:
         List<String> stringList = new ArrayList<>();
@@ -44,10 +45,11 @@ public class Collection {
         System.out.println("Список содержит строку с префиксом '" + prefix + "': " + containsPrefix(list, prefix));
 
 
-        // 1. Получение списка длин строк
+        // 5. Получение списка длин строк
         List<Integer> lengths = countChars(stringList);
         System.out.println("Длины строк: " + lengths); // Например: [5, 4, 6, 3]
-        // 6. Проверка сортировки списка чисел
+
+        // 7. Проверка сортировки списка чисел
         List<Integer> sortedNumbers = new ArrayList<>();
         sortedNumbers.add(1);
         sortedNumbers.add(3);
@@ -56,7 +58,7 @@ public class Collection {
         System.out.println("Список " + sortedNumbers + " отсортирован? " + isSorted(sortedNumbers)); // true
     }
 
-    //У вас есть список значений String, вы должны вернуть список количества
+    //1.У вас есть список значений String, вы должны вернуть список количества
     // символов этих String
     public static List<Integer> countChars(List<String> strings) {
         List<Integer> countLengths = new ArrayList<>();
@@ -75,7 +77,7 @@ public class Collection {
         return countLengths;
     }
 
-    //у вас есть список значений String, вы должны вернуть список со всеми
+    //2.у вас есть список значений String, вы должны вернуть список со всеми
     // значениями String более трех символов
     public static List<String> newListStrMoreThreeElem(List<String> stringList) {
         List<String> result = new ArrayList<>();
@@ -88,7 +90,7 @@ public class Collection {
         return result;
 
     }
-    //у вас есть список значений Integer, вы должны вернуть их сумму
+    //3.у вас есть список значений Integer, вы должны вернуть их сумму
 
     public static int getSum(List<Integer> integerList) {
         int sum = 0;
@@ -101,7 +103,7 @@ public class Collection {
         return sum;
     }
 
-    //у вас есть список String, вы должны вернуть максимальную длину String
+    //5.у вас есть список String, вы должны вернуть максимальную длину String
     public static int findMaxLength(List<String> strings) {
         int maxLength = 0;
         for (String str : strings) {
@@ -118,7 +120,6 @@ public class Collection {
             throw new IllegalArgumentException("Список пуст");
         }
         int max = integers.get(0);
-        // Проходим по списку и ищем максимальное значение
         for (Integer number : integers) {
             if (number > max) {
                 max = number;
@@ -127,7 +128,7 @@ public class Collection {
         return max;
     }
 
-    //Написать метод, который выдает из исходного списка список всех значений,
+    //7.Написать метод, который выдает из исходного списка список всех значений,
     // делящихся на заданное число q.
     public static List<Integer> findAllMultiple(List<Integer> integers, int q) {
         ArrayList<Integer> multiples = new ArrayList<>();
@@ -139,7 +140,7 @@ public class Collection {
         return multiples;
     }
 
-    //Написать метод, который проверяет, является ли список Integer отсортированным.
+    //6.Написать метод, который проверяет, является ли список Integer отсортированным.
     //чтобы список считался отсортированным по возрастанию, все последовательные пары
     // элементов должны быть расположены в порядке неубывания
     // (то есть каждый следующий элемент должен быть больше или равен предыдущему).
@@ -153,7 +154,7 @@ public class Collection {
     }
 
 
-    //Найти все дубликаты в List<String> и вернуть их в виде нового списка.
+    //14.Найти все дубликаты в List<String> и вернуть их в виде нового списка.
     public static List<String> findDuplicates(List<String> list) {
         Set<String> seen = new HashSet<>();  // Храним элементы, которые уже встретились
         Set<String> duplicates = new HashSet<>(); // Храним дубликаты
@@ -167,13 +168,13 @@ public class Collection {
         return new ArrayList<>(duplicates); // Преобразуем Set в List и возвращаем
     }
 
-    //Проверить, содержит ли List<String> заданную строку и вернуть ее индекс. Если строка не найдена,
+    //15.Проверить, содержит ли List<String> заданную строку и вернуть ее индекс. Если строка не найдена,
     // вернуть -1.
 public static int findStringIndex(List<String> list, String target) {
     return list.indexOf(target);
 }
 
-//Проверить, содержит ли List<String> хотя бы одну строку, которая начинается с заданного префикса.
+//17.Проверить, содержит ли List<String> хотя бы одну строку, которая начинается с заданного префикса.
 public static boolean containsPrefix(List<String> list, String prefix) {
     for (String str : list) {
         if (str.startsWith(prefix)) {

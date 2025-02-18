@@ -6,9 +6,10 @@ public class Task_LinkedList {
     public static void main(String[] args) {
         LinkedList<String> strings = new LinkedList<>(List.of("Mary", "Jane", "Tom", "Tim", "Mark", "Ann"));
         System.out.println(findShortestString(strings));
-        System.out.println(joinStrings(strings));
-//        String result = joinStrings(strings);
-//        System.out.println(result);
+
+        List<String> strings1 = new LinkedList<>(List.of("Mary", "Jane", "Tom", "Tim", "Mark", "Ann"));
+        System.out.println(joinStrings(strings1));
+
         System.out.println(reverseList(strings));
 //        List<String> reversedList = reverseList(strings);
 //        System.out.println("Список в обратном порядке: " + reversedList);
@@ -27,23 +28,21 @@ public class Task_LinkedList {
 
     }
 
-    //Перебрать LinkedList и найти самую короткую строку.
+    //9.Перебрать LinkedList и найти самую короткую строку.
     public static String findShortestString(LinkedList<String> list) { // Теперь принимает LinkedList<String>
         if (list.isEmpty()) {
             return null;
         }
         String shortest = list.getFirst(); // getFirst() работает только с LinkedList
-
         for (String str : list) {
             if (str.length() < shortest.length()) {
                 shortest = str;
             }
         }
-
         return shortest;
     }
 
-    //Перебрать LinkedList и объединить все строки в одну с использованием разделителя "|".
+    //10.Перебрать LinkedList и объединить все строки в одну с использованием разделителя "|".
 //    public static String joinStrings(List<String> list) {
 //        return String.join("|", list);
 //    }
@@ -52,19 +51,16 @@ public class Task_LinkedList {
 
         StringBuilder result = new StringBuilder();
         for (String str : list) {
-            if (result.length() > 0) { //if (!result.isEmpty()) {
+            if (result.length() > 0) {
                 result.append("|");
             }
             result.append(str);
         }
-
         return result.toString();
     }
 
-    //element = 2 output: 3 (индекс первого вхождения), 6 (индекс последнего вхождения)
 // Метод для поиска первого и последнего вхождения элемента в LinkedList
     public static int[] getFirstAndLastOccurrence(LinkedList<Integer> list, int element) {
-
         int firstIndex = -1;
         int lastIndex = -1;
         int index = 0;
@@ -79,78 +75,43 @@ public class Task_LinkedList {
         }
         return new int[]{firstIndex, lastIndex};
     }
-
-    //Имеется лист. Написать метод, возвращающий этот же лист,
-    //в котором элементы расположены в обратном порядке.
+    //С помощью listIterator:
+    //c)в котором элементы расположены в обратном порядке.
     public static List<String> reverseList(List<String> list) {
-        List<String> reversed = new LinkedList<>();
-//        for (int i = list.size() - 1; i >= 0; i--) {
-//            reversed.add(list.get(i));
-//        }
-        for (String str : list) {
-            reversed.add(0, str);  // Это эквивалентно addFirst() в LinkedList
+        LinkedList<String> reversed = new LinkedList<>();
+        ListIterator<String> it = list.listIterator(list.size());
+        while (it.hasPrevious()) {
+            reversed.add(it.previous());
         }
         return reversed;
     }
-    public static List<Integer> reverseListInt(List<Integer> list) {
-        List<Integer> reversed = new LinkedList<>();
 
-        for (int i = list.size() - 1; i >= 0; i--) {
-            reversed.add(list.get(i));
+    public static List<Integer> reverseListInt(List<Integer> list) {
+        LinkedList<Integer> reversed = new LinkedList<>();
+        ListIterator<Integer> it = list.listIterator(list.size());
+        while (it.hasPrevious()) {
+            reversed.add(it.previous());
         }
         return reversed;
     }
 
     //Найти все дубликаты в List<String> и вернуть их в виде нового списка.
     public static List<String> findDuplicates(List<String> list) {
-        Set<String> seen = new HashSet<>();  // Храним элементы, которые уже встретились
-        Set<String> duplicates = new HashSet<>(); // Храним дубликаты
+        Set<String> seen = new HashSet<>();
+        List<String> duplicates = new ArrayList<>();
 
         for (String str : list) {
-            if (!seen.add(str)) { // Если элемент не удалось добавить (он уже существует в set 'seen'), значит это дубликат
+            if (!seen.add(str)) { // Если не удалось добавить — дубликат
                 duplicates.add(str);
             }
         }
-
-        return new ArrayList<>(duplicates); // Преобразуем Set в List и возвращаем
+        return duplicates;
     }
-
-    //Проверить, содержит ли List<String> заданную строку и вернуть ее индекс. Если строка не найдена,
-    // вернуть -1.
-
 }
 
 
-//Создать LinkedList с объектами вашего собственного класса и
-// удалить все элементы, удовлетворяющие определенному условию.
 
-//Найти сумму всех элементов в Set<Integer>, которые являются четными числами.
-//
-//
-//
-//Проверить, содержит ли List<String> хотя бы одну строку, которая начинается с заданного префикса.
-//
-//
-//
-//Получить все возможные комбинации из Set<String> и Set<Integer>, где каждая комбинация представляет собой строку и число, объединенные вместе.
-//
-//
-//
-//Создать TreeSet. Из него: Найти заданное число 10, самое большое, самое маленькое Вывести все четные числа Получить список всех чисел в обратном порядке Получить список всех чисел меньше 7
-//
-//
-//
-//Создать класс Point для хранения координат (x, y) точки на плоскости. Создать список точек, отсортировать по координате y. Создать TreeSet со всеми уникальными точками. Создать TreeSet со всеми различными по координате y точками. 
-//
-//
-//
-//Имеется два набора элементов Set. Создать Set, в котором бы находились: все элементы из двух наборов, только общие для двух наборов элементы, только элементы, которые присутствуют в первом наборе и отсутствуют во втором
-//
-//
-//
-//На основе библиотечного класса LinkedList реализовать такую структуру данных, как стек: Создать класс CustomStack с методами push(), pop(), peek(). Протестировать работу класса.
-//
-//
+
 
 
 
