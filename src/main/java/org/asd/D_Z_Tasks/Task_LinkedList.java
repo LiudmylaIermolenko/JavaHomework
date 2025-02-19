@@ -7,24 +7,28 @@ public class Task_LinkedList {
         LinkedList<String> strings = new LinkedList<>(List.of("Mary", "Jane", "Tom", "Tim", "Mark", "Ann"));
         System.out.println(findShortestString(strings));
 
-        List<String> strings1 = new LinkedList<>(List.of("Mary", "Jane", "Tom", "Tim", "Mark", "Ann"));
+        List<String> strings1 = new LinkedList<>(List.of("Mary", "Jane", "Tom", "Jane", "Tom", "Tim", "Mark", "Ann"));
         System.out.println(joinStrings(strings1));
 
         System.out.println(reverseList(strings));
 //        List<String> reversedList = reverseList(strings);
 //        System.out.println("Список в обратном порядке: " + reversedList);
-        List<String> duplicates = findDuplicates(strings);
+        List<String> duplicates = findDuplicates(strings1);
         System.out.println("Дубликаты: " + duplicates);
 
-        //for Integer:
-        LinkedList<Integer> list = new LinkedList<>(List.of(1, 4, 3, 2, 1, 2, 2, 0));
+
+        LinkedList<Integer> list = new LinkedList<>(List.of(1, 4, 3, 2, 3, 2, 2, 0));
         System.out.println("Список: " + list);
+        // Метод для поиска первого и последнего вхождения элемента в LinkedList
         int element = 3;
         int[] indices = getFirstAndLastOccurrence(list, element);
         System.out.println("Первое вхождение: " + indices[0]);
         System.out.println("Последнее вхождение: " + indices[1]);
+        System.out.println("Occurrences: " + Arrays.toString(indices));
 
-        System.out.println(reverseListInt(list));
+        reverseListInt(list);
+        System.out.println("Список после переворота: " + list);
+
 
     }
 
@@ -86,13 +90,14 @@ public class Task_LinkedList {
         return reversed;
     }
 
-    public static List<Integer> reverseListInt(List<Integer> list) {
-        LinkedList<Integer> reversed = new LinkedList<>();
-        ListIterator<Integer> it = list.listIterator(list.size());
-        while (it.hasPrevious()) {
-            reversed.add(it.previous());
+    public static void reverseListInt(List<Integer> list) {
+        int size = list.size();
+        for (int i = 0; i < size / 2; i++) {
+            int first = list.get(i);
+            int last = list.get(size - 1 - i);
+            list.set(i, last);  // Меняем первый элемент с последним
+            list.set(size - 1 - i, first);  // Меняем последний элемент с первым
         }
-        return reversed;
     }
 
     //Найти все дубликаты в List<String> и вернуть их в виде нового списка.

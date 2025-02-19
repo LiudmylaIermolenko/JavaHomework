@@ -30,6 +30,23 @@ public class MySet {
         System.out.println("Объединение: " + union(set1, set2));
         System.out.println("Пересечение: " + intersection(set1, set2));
         System.out.println("Разность (set1 - set2): " + difference(set1, set2));
+
+        Set<String> set3 = new HashSet<>();
+        Set<String> set4 = new HashSet<>();
+
+        set3.add("apple");
+        set3.add("banana");
+        set3.add(""); // Пустая строка
+        set3.add("grape");
+
+        set4.add("banana");
+        set4.add("pear");
+        set4.add("apple");
+        set4.add("  "); // Строка с пробелами
+
+        System.out.println("Union: " + union(set3, set4)); // [apple, banana, pear, grape]
+        System.out.println("Intersection: " + intersection(set3, set4)); // [banana, apple]
+        System.out.println("Difference: " + difference(set3, set4)); // [grape]
     }
 
     //Найти сумму всех элементов в Set<Integer>, которые являются четными числами.
@@ -67,22 +84,22 @@ public class MySet {
     //Имеется два набора элементов Set. Создать Set, в котором бы находились:
     //    // все элементы из двух наборов, только общие для двух наборов элементы,
     //    // только элементы, которые присутствуют в первом наборе и отсутствуют во втором
-    public static Set<Integer> union(Set<Integer> set1, Set<Integer> set2) {
-        Set<Integer> result = new HashSet<>(set1);
+    public static <T>Set<T> union(Set<T> set1, Set<T> set2) {
+        Set<T> result = new HashSet<>(set1);
         result.addAll(set2);
         return result;
     }
 
     // Метод пересечения множеств
-    public static Set<Integer> intersection(Set<Integer> set1, Set<Integer> set2) {
-        Set<Integer> result = new HashSet<>(set1);
+    public static <T>Set<T> intersection(Set<T> set1, Set<T> set2) {
+        Set<T> result = new HashSet<>(set1);
         result.retainAll(set2);
         return result;
     }
 
     // Метод разности (set1 - set2)
-    public static Set<Integer> difference(Set<Integer> set1, Set<Integer> set2) {
-        Set<Integer> result = new HashSet<>(set1);
+    public static <T>Set<T> difference(Set<T> set1, Set<T> set2) {
+        Set<T> result = new HashSet<>(set1);
         result.removeAll(set2);
         return result;
     }
