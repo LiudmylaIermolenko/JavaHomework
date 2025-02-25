@@ -41,13 +41,15 @@ public class LimitedArrayList<E> implements List<E> {
     }
 
     private void checkIndex(int index) {
-        if (index < 0 || index >= size) {
+        if (index < 0 || index > size) {
+            System.out.println("Invalid index: "+ index);
             throw new InvalidIndexException("Invalid index: " + index);
         }
     }
 
     private void ensureNotFull() {
         if (size >= capacity) {
+            System.out.println("Размер списка достиг предела!");
             throw new ListFullException("List is full. Cannot add more elements.");
         }
     }
@@ -142,9 +144,19 @@ public class LimitedArrayList<E> implements List<E> {
 
     @Override
     public int lastIndexOf(Object o) {
+        if (o == null){
         for (int i = size - 1; i >= 0; i--) {
-            if (Objects.equals(elements[i], o)) {
+            if (elements[i] == null) {
                 return i;
+            }
+        }
+        return -1;
+    }
+        else {
+            for (int i = size - 1; i >= 0; i--) {
+                if (o.equals(elements[i])) {
+                    return i;
+                }
             }
         }
         return -1;
