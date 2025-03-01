@@ -4,15 +4,26 @@ import java.util.Iterator;
 
 public class Main {
     public static void main(String[] args) {
-        LimitedArrayList<Integer> list = new LimitedArrayList<>(5);
+        LimitedArrayList<Integer> list = new LimitedArrayList<>(50);
         list.add(10);
         list.add(20);
         list.add(30);
+        list.add(30);
+        list.add(30);
+        list.add(30);
+        list.add(30);
+        list.add(30);
+        list.add(30);
+        list.add(30);
+        list.add(30);
+        list.add(30);
+        list.add(30);
+        list.add(30);
         list.add(150);
-        //list.add(30);
-        //list.add(30);
+
         System.out.println(list); // [10, 20, 30]
-        list.add(4, 15);// [10, 20, 30, 150, 15]
+        System.out.println(list.size()); // [10, 20, 30]
+        list.add(3, 15);// [10, 20, 30, 150, 15]
         System.out.println(list);
 //        list.add(6, 25);//Invalid index
 //        System.out.println(list);

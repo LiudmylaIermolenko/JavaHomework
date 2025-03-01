@@ -25,31 +25,34 @@ class InvalidIndexException extends RuntimeException {
 public class LimitedArrayList<E> implements List<E> {
     private Object[] elements;
     private int size = 0;
-    private final int capacity;
+    private int maxSize;
+    private static final int DEFAULT_CAPACITY = 10;
 
-//    public LimitedArrayList(int capacity, int size, Object[] elements) {
-//        this.capacity = capacity;
-//        this.size = size;
-//        this.elements = elements;
-//    }
-    public LimitedArrayList(int capacity) {
-        if (capacity <= 0) {
-            throw new IllegalArgumentException("Capacity must be greater than zero.");
+    public LimitedArrayList(int maxSize) {
+        if (maxSize <= 0) {
+            throw new IllegalArgumentException("Max size must be greater than zero.");
         }
-        this.capacity = capacity;
-        this.elements = new Object[capacity];
+        this.maxSize = maxSize;
+        elements = new Object[DEFAULT_CAPACITY];
     }
 
     private void checkIndex(int index) {
-        if (index < 0 || index > size) {
-            System.out.println("Invalid index: "+ index);
+        if (index < 0 || index >= size) {
             throw new InvalidIndexException("Invalid index: " + index);
         }
     }
 
+    private Object[] grow(){
+        Object[] newArr = new Object[elements.length * 3/2];
+        for (int i = 0; i < elements.length; i++) {
+            newArr[i] = elements[i];
+        }
+        return  newArr;
+    }
+
+
     private void ensureNotFull() {
-        if (size >= capacity) {
-            System.out.println("Размер списка достиг предела!");
+        if (size >= maxSize) {
             throw new ListFullException("List is full. Cannot add more elements.");
         }
     }
@@ -57,6 +60,11 @@ public class LimitedArrayList<E> implements List<E> {
     @Override
     public boolean add(E e) {
         ensureNotFull();
+
+        if (size == elements.length){
+            elements = grow();
+        }
+
         elements[size] = e;
         size++;
         return true;
@@ -64,7 +72,12 @@ public class LimitedArrayList<E> implements List<E> {
 
     @Override
     public void add(int index, E element) {
+        checkIndex(index);
         ensureNotFull();
+        if (size == elements.length){
+            elements = grow();
+        }
+
         checkIndex(index);
         for (int i = size; i > index; i--) {
             elements[i] = elements[i - 1];
@@ -94,7 +107,7 @@ public class LimitedArrayList<E> implements List<E> {
         for (int i = index; i < size - 1; i++) {
             elements[i] = elements[i + 1];
         }
-        elements[--size] = null; // Убираем последний элемент
+        elements[--size] = null;
         return removedElement;
     }
 
@@ -144,19 +157,9 @@ public class LimitedArrayList<E> implements List<E> {
 
     @Override
     public int lastIndexOf(Object o) {
-        if (o == null){
         for (int i = size - 1; i >= 0; i--) {
-            if (elements[i] == null) {
+            if (Objects.equals(elements[i], o)) {
                 return i;
-            }
-        }
-        return -1;
-    }
-        else {
-            for (int i = size - 1; i >= 0; i--) {
-                if (o.equals(elements[i])) {
-                    return i;
-                }
             }
         }
         return -1;
