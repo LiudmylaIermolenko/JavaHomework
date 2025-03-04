@@ -1,8 +1,8 @@
-package org.asd.D_Z_Tasks;
+package org.asd.H_Work_04_03;
 
 import java.util.List;
 
-import static org.asd.D_Z_Tasks.UserParser.parseUsers;
+import static org.asd.H_Work_04_03.UserParser.parseUsers;
 
 public class MainUser {
     public static void main(String[] args) {
