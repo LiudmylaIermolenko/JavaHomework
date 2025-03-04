@@ -1,4 +1,4 @@
-package org.asd.D_Z_Tasks;
+package org.asd.H_Work_04_03;
 
 public class User {
 
