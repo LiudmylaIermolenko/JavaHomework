@@ -1,4 +1,4 @@
-package org.asd.H_Work_04_03;
+package org.asd.HomeWork_Pract;
 
 public class ArrayFinder {
     public int getMax(int[] array) {
