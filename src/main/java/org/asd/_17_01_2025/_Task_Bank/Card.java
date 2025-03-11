@@ -1,4 +1,4 @@
-package org.asd._17_01_2025._Task_BankNew;
+package org.asd._17_01_2025._Task_Bank;
 
 public class Card {
 
@@ -10,8 +10,8 @@ public class Card {
         this.balance = balance;
     }
 
-    public Card(String name) {
-        this(name, 0.0);
+    public Card(String username) {
+        this.username = username;
     }
 
     public String getUsername() {
@@ -29,18 +29,23 @@ public class Card {
 
     public void deposit(double amount) {
         if (amount > 0) {
-            this.balance += amount;
-            System.out.println("Balance of " + getUsername() + " was added in the amount of: " + amount);
+            balance += amount;
+            System.out.println(username + " deposited " + amount + "$.");
             displayBalance();
         } else {
             System.out.println("Error: amount must be > 0.");
         }
     }
 
+    public void displayBalance() {
+        System.out.println(username + "'s balance: " + balance + "$.");
+    }
+
+
     public void getMoney(double amount) {
         if (amount > 0) {
             if (amount <= balance) {
-                this.balance -= amount;
+                balance -= amount;
                 System.out.println("Withdrawn amount: " + amount);
                 displayBalance();
             } else {
@@ -51,9 +56,6 @@ public class Card {
         }
     }
 
-    public void displayBalance() {
-        System.out.println("New balance of username " + getUsername() + " is: " + getBalance() + " $");
-    }
 
     // Метод для отображения баланса в другой валюте
     public void displayBalanceInCurrency(String currency, double exchangeRate) {
@@ -65,7 +67,20 @@ public class Card {
         }
     }
 }
-
+//Домашнее, на базе прошлой домашней работы
+//Сделать класс Card родителем,
+//Определите два подкласса (наследника) CreditCard и DebitCard
+// которые реализуют соотв. поведение :
+//•    дебетовая карта: не допускает снятие денег (уменьшение баланса)
+// если это приводит к отрицательному остатку на карте.
+//•    кредитная карта: допускает снятие со счета, даже если баланс не
+// положительный. Т.о., у владельца карты накапливается долг.
+//Также, реализуйте класс Банкомат (Atm) который, используя переданную
+// ему карту, позволяет проводить операции пополнения/снятия/отображения.
+//
+//
+//** Дополнительное условие, по желанию: Реализовать работу с пинкодом
+// Карты (не допускать любые операции, если введён не верный пинкод)
 
 //Создайте класс Карта, которая содержит имя пользователя и баланс
 //Сделайте несколько конструкторов (перегрузка) для:

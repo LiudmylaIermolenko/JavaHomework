@@ -1,4 +1,4 @@
-package org.asd._17_01_2025._Task_BankNew;
+package org.asd._17_01_2025._Task_Bank;
 
 
 public class MainApp {
