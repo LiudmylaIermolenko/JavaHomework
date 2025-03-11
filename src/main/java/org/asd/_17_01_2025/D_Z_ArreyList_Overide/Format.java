@@ -12,29 +12,29 @@ public class Format {
     public static void main(String[] args) {
         String text = "Once upon a time a Wolf was lapping at a spring on a hillside, " +
                 "when, looking up, what should he see but a Lamb just beginning to drink a little lower down.";
+        String text1 = "Как дела? Все хорошо, всё отлично.";
 
-        String result = formatText(text);
+        //String result = formatText(text);
+        String result = formatText(text1);
+        //System.out.println(result);
         System.out.println(result);
     }
 
     public static String formatText(String text) {
-        text = text.toLowerCase().replaceAll("[^a-zA-Zа-яА-Я'\\s]", ""); // Убираем знаки препинания и числа
+        text = text.replace("ё", "ё");
+        System.out.println(text);
+        text = text.toLowerCase().replaceAll("[^a-zA-Zа-яА-ЯёЁ'\\s]", ""); // Убираем знаки препинания и числа
         String[] words = text.split("\\s+");
         Map<Character, Map<String, Integer>> wordGroups = new HashMap<>();
 
         for (String word : words) {
             if (!word.isEmpty()) {
                 char firstLetter = word.charAt(0);
-                if (!wordGroups.containsKey(firstLetter)) {
-                    wordGroups.put(firstLetter, new HashMap<>());
-                }
+                wordGroups.putIfAbsent(firstLetter, new HashMap<>());
                 Map<String, Integer> wordCounts = wordGroups.get(firstLetter);
 
-                if (!wordCounts.containsKey(word)) {
-                    wordCounts.put(word, 1);
-                } else {
-                    wordCounts.put(word, wordCounts.get(word) + 1);
-                }
+                // Подсчет частоты появления каждого слова
+                wordCounts.put(word, wordCounts.getOrDefault(word, 0) + 1);
             }
         }
         return generateFormattedText(wordGroups);
@@ -62,5 +62,8 @@ public class Format {
         return result.toString();
     }
 }
+
+//написать тесты
+//Проверить разные случаи: например текст на другом языке для задания по строке
 
 
