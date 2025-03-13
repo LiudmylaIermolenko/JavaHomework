@@ -7,7 +7,22 @@ package org.asd._17_01_2025.D_Z_ArreyList_Overide;
 // set, add по индексу, remove по индексу, indexOf, lastIndexOf; toString.
 // Разделяйте логику, если это возможно, можно создавать внутри реализации приватные
 // методы, в которые выносить часть логики(пример: метод grow() при добавлении нового элемента
-
+//В задании требуется реализовать и протестировать следующие методы:
+//
+//        size()
+//        isEmpty()
+//        contains(Object o)
+//        iterator()
+//        add(E e)
+//        add(int index, E element)
+//        remove(int index)
+//        remove(Object o)
+//        clear()
+//        get(int index)
+//        set(int index, E element)
+//        indexOf(Object o)
+//        lastIndexOf(Object o)
+//        toString()
 import java.util.*;
 
 class ListFullException extends RuntimeException {
@@ -59,27 +74,20 @@ public class LimitedArrayList<E> implements List<E> {
 
     @Override
     public boolean add(E e) {
-        ensureNotFull();
-
-        if (size == elements.length){
-            elements = grow();
-        }
-
-        elements[size] = e;
-        size++;
-        return true;
+       add(size, e);
+       return true;
     }
 
     @Override
     public void add(int index, E element) {
-        checkIndex(index);
+        if (index < 0 || index > size) { // Разрешаем вставку в конец
+            throw new InvalidIndexException("Invalid index: " + index);
+        }
         ensureNotFull();
-        if (size == elements.length){
+        if (size == elements.length) {
             elements = grow();
         }
-
-        checkIndex(index);
-        for (int i = size; i > index; i--) {
+        for (int i = size; i > index; i--) { // Сдвигаем элементы вправо
             elements[i] = elements[i - 1];
         }
         elements[index] = element;
@@ -240,3 +248,10 @@ public class LimitedArrayList<E> implements List<E> {
         return false;
     }
 }
+
+//написать тесты
+//Проверить разные случаи: например  работу
+// с null для реализации листа,
+// проверить выбрасывание исключений если имеются.
+//метод add для своей реализации листа протестируйте следующим образом (на скрине), метод equals переопределять не нужно. в тестах следите что бы в expected находилась какая то библиотечная реализация листа (прим. List.of или new ArrayList, а не  MyArrayList !), а в actual уже будет ваш MyArrayList.
+//Тестирование своей реализации листа остаётся в силе)
