@@ -80,14 +80,14 @@ public class LimitedArrayList<E> implements List<E> {
 
     @Override
     public void add(int index, E element) {
-        if (index < 0 || index > size) { // Разрешаем вставку в конец
+        if (index < 0 || index > size) {
             throw new InvalidIndexException("Invalid index: " + index);
         }
         ensureNotFull();
         if (size == elements.length) {
             elements = grow();
         }
-        for (int i = size; i > index; i--) { // Сдвигаем элементы вправо
+        for (int i = size; i > index; i--) {
             elements[i] = elements[i - 1];
         }
         elements[index] = element;
