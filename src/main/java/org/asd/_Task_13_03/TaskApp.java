@@ -1,79 +1,49 @@
 package org.asd._Task_13_03;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-//
+
 public class TaskApp {
     public static void main(String[] args) {
-//
-//        Worker worker1 = new Worker("John", Skill.CIVIL_ENGINEER);
-//        Worker worker2 = new Worker("Jane", Skill.ARCHITECT);
-//
-//        List<Worker> workers1 = Arrays.asList(worker1, worker2);
-//        Brigade brigade1 = new Brigade(5000, workers1);
-//
-//        Worker worker3 = new Worker("Bob", Skill.CARPENTER);
-//        Worker worker4 = new Worker("Alice", Skill.PAINTER_PLASTERER);
-//
-//        List<Worker> workers2 = Arrays.asList(worker3, worker4);
-//        Brigade brigade2 = new Brigade(6000, workers2);
-//
-//        //List<Brigade> brigades = Arrays.asList(brigade1, brigade2);
-//
-//        Worker worker5 = new Worker("Dave", Skill.ROOFER);
-//        List<Worker> workers3 = Arrays.asList(worker1, worker2, worker5);
-//        Brigade brigade3 = new Brigade(4500, workers3);
-//
-//        List<Brigade> brigades = Arrays.asList(brigade1, brigade2, brigade3);
-//
-//        Set<Skill> requiredSkills = new HashSet<>(Arrays.asList(
-//                Skill.CIVIL_ENGINEER, Skill.ARCHITECT, Skill.ROOFER));
-//
+
+        Map<Skill, Integer> requiredSkills = new HashMap<>();
+        requiredSkills.put(Skill.CIVIL_ENGINEER, 1);
+        requiredSkills.put(Skill.CARPENTER, 2);
+        requiredSkills.put(Skill.ROOFER, 1);
+
+        Worker w1 = new Worker("Иван", Skill.CIVIL_ENGINEER);
+        Worker w2 = new Worker("Петр", Skill.CARPENTER);
+        //Worker w2 = new Worker("Петр", Skill.ARCHITECT);
+        Worker w3 = new Worker("Анна", Skill.ROOFER);
+        Worker w4 = new Worker("Мария", Skill.CARPENTER, Skill.ROOFER);
+        Worker w5 = new Worker("Сергей", Skill.ROOFER);
+        Worker w6 = new Worker("Алексей", Skill.ELECTRICIAN);
+
+        Brigade b1 = new Brigade(5000, List.of(w1, w2, w3, w4));
+        Brigade b2 = new Brigade(4500, List.of(w1, w2, w3, w5));
+        Brigade b3 = new Brigade(6000, List.of(w1, w2, w3, w5, w6));
+
+        List<Brigade> brigades = List.of(b1, b2, b3);
+
+        Tender tender = new Tender(requiredSkills, "Строительство библиотеки");
+
+
 //        try {
-//            Brigade bestBrigade = Tender.findCheapestBrigade(brigades, requiredSkills);
-//            System.out.println("Выбрана бригада: " + bestBrigade);
+//            Brigade cheapestBrigade = Tender.findCheapestBrigade(brigades, requiredSkills);
+//            System.out.println("Тендер: " + tender.getTenderName());
+//            System.out.println("Требуемые навыки: " + tender.getRequiredSkills());
+//            System.out.println("Самая дешевая бригада: " + cheapestBrigade);
 //        } catch (RuntimeException e) {
 //            System.out.println(e.getMessage());
 //        }
-//    }
-//    }
-
-        Set<Skill> requiredSkills = new HashSet<>();
-        requiredSkills.add(Skill.CIVIL_ENGINEER);
-        requiredSkills.add(Skill.CARPENTER);
-        requiredSkills.add(Skill.ROOFER);
-
-        Worker worker1 = new Worker("Иван", Skill.CIVIL_ENGINEER);
-        Worker worker2 = new Worker("Пётр", Skill.CARPENTER);
-        Worker worker3 = new Worker("Сергей", Skill.ROOFER);
-        Worker worker4 = new Worker("Антон", Skill.CIVIL_ENGINEER, Skill.PAINTER_PLASTERER);
-
-        Brigade brigade1 = new Brigade(5000, Arrays.asList(worker1, worker2, worker3)); // Подходит
-        Brigade brigade2 = new Brigade(4500, Arrays.asList(worker1, worker4)); // Не хватает плотника
-        Brigade brigade3 = new Brigade(6000, Arrays.asList(worker2, worker3, worker4)); // Подходит, но дороже
-
-        List<Brigade> brigades = Arrays.asList(brigade1, brigade2, brigade3);
-
-        Tender tender = new Tender(requiredSkills, "Строительство библиотеки", 6000);
-
-
         try {
-            Brigade cheapestBrigade = Tender.findCheapestBrigade(brigades, requiredSkills);
-
-            System.out.println("Тендер: " + tender.getTenderName());
-            System.out.println("Требуемые навыки: " + tender.getSkills());
-            System.out.println("Самая дешевая бригада: " + cheapestBrigade);
-            System.out.println("Навыки самой дешевой бригады: " + cheapestBrigade.getAllSkills());
+            Brigade bestBrigade = Tender.findCheapestBrigade(brigades, tender.getRequiredSkills());
+            System.out.println("Подходящая бригада: " + bestBrigade);
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }
     }
-
 }
-
 
 //Представьте ситуацию: Тендер на строительство ещё одной национальной библиотеки На контракт претендуют несколько бригад строителей. В каждой бригаде есть некоторое количество работников, обладающих набором профессиональных навыков (все навыки ограничены специально созданным вами перечисляемым
 // типом enum;  один работник может обладать несколькими навыками), и свое финансовое предложение. Для того чтобы получить контракт, надо соответствовать требованиям (иметь все требуемые навыки). Из подходящих бригад выбрать самую дешевую. Если подходящих не нашлось – закрыть проект строительства☹️ (можно выкинуть исключение)

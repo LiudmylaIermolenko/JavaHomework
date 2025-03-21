@@ -1,23 +1,20 @@
 package org.asd._Task_13_03;
 
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 public class Tender {
 
-     private Set<Skill> requiredSkills;
+    private Map<Skill, Integer> requiredSkills;
 
     private String tenderName;
 
-    private double maxCost;
-
-    public Tender(Set<Skill> requiredSkills, String tenderName, double cost) {
+    public Tender(Map<Skill, Integer> requiredSkills, String tenderName) {
         this.requiredSkills = requiredSkills;
         this.tenderName = tenderName;
-        this.maxCost = cost;
     }
 
-    public Set<Skill> getSkills() {
+    public Map<Skill, Integer> getRequiredSkills() {
         return requiredSkills;
     }
 
@@ -25,18 +22,16 @@ public class Tender {
         return tenderName;
     }
 
-    public double getMaxCost() {
-        return maxCost;
-    }
-
-    public static Brigade findCheapestBrigade(List<Brigade> brigades, Set<Skill> requiredSkills) {
+    public static Brigade findCheapestBrigade(List<Brigade> brigades, Map<Skill, Integer> requiredSkills) {
         Brigade cheapestBrigade = null;
         double minCost = Double.MAX_VALUE;
 
         for (Brigade brigade : brigades) {
-            if (brigade.meetsRequirements(requiredSkills) && brigade.getCost() < minCost) {
-                cheapestBrigade = brigade;
-                minCost = brigade.getCost();
+            if (brigade.meetsRequirements(requiredSkills)) {
+                if (brigade.getCost() < minCost) {
+                    cheapestBrigade = brigade;
+                    minCost = brigade.getCost();
+                }
             }
         }
 
@@ -47,13 +42,8 @@ public class Tender {
     }
 
 
-
     @Override
     public String toString() {
-        return "Tender{" +
-                "skills=" + requiredSkills +
-                ", tenderName='" + tenderName + '\'' +
-                ", cost=" + maxCost +
-                '}';
+        return "Tender{requiredSkills=" + requiredSkills + ", tenderName='" + tenderName + "'}";
     }
 }

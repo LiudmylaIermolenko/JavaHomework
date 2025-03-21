@@ -2,8 +2,9 @@ package org.asd._Task_13_03;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,54 +12,58 @@ class TenderTest {
 
     @Test
     void getSkills() {
-        Set<Skill> requiredSkills = Set.of(Skill.CIVIL_ENGINEER, Skill.ARCHITECT, Skill.SURVEYOR);
-        Tender tender = new Tender(requiredSkills, "Строительство библиотеки", 10000);
+        Map<Skill, Integer> requiredSkills = new HashMap<>();
+        requiredSkills.put(Skill.CIVIL_ENGINEER, 1);
+        requiredSkills.put(Skill.ARCHITECT, 1);
+        requiredSkills.put(Skill.SURVEYOR, 1);
 
-        assertEquals(requiredSkills, tender.getSkills());
+        Tender tender = new Tender(requiredSkills, "Строительство библиотеки");
+
+        assertEquals(requiredSkills, tender.getRequiredSkills());
     }
 
 
     @Test
     void getTenderName() {
-        Tender tender = new Tender(Set.of(Skill.CIVIL_ENGINEER), "Строительство библиотеки", 10000);
-
+        Tender tender = new Tender(new HashMap<>(), "Строительство библиотеки");
         assertEquals("Строительство библиотеки", tender.getTenderName());
-    }
-
-    @Test
-    void getMaxCost() {
-        Tender tender = new Tender(Set.of(Skill.CIVIL_ENGINEER), "Строительство библиотеки", 10000);
-
-        assertEquals(10000, tender.getMaxCost());
     }
 
     @Test
     void findCheapestBrigade() {
         Worker w1 = new Worker("Иван", Skill.CIVIL_ENGINEER);
-        Worker w2 = new Worker("Петр", Skill.ARCHITECT);
-        Worker w3 = new Worker("Анна", Skill.SURVEYOR);
+        Worker w2 = new Worker("Петр", Skill.CARPENTER);
+        //Worker w2 = new Worker("Петр", Skill.ARCHITECT);
+        Worker w3 = new Worker("Анна", Skill.ROOFER);
         Worker w4 = new Worker("Мария", Skill.CARPENTER, Skill.ROOFER);
         Worker w5 = new Worker("Сергей", Skill.ROOFER);
-        Worker w6 = new Worker("Алексей", Skill.ECONOMIST);
+        Worker w6 = new Worker("Алексей", Skill.ELECTRICIAN);
 
-        Brigade b1 = new Brigade(5000, List.of(w1, w2, w3, w5, w6));
-        Brigade b2 = new Brigade(4500, List.of(w1, w2, w3, w4)); // Не подходит
-        Brigade b3 = new Brigade(6000, List.of(w1, w2, w3, w5, w6)); // Дороже
+        Brigade b1 = new Brigade(5000, List.of(w1, w2, w3, w4));
+        Brigade b2 = new Brigade(4500, List.of(w1, w2, w3, w5));
+        Brigade b3 = new Brigade(6000, List.of(w1, w2, w3, w5, w6));
 
         List<Brigade> brigades = List.of(b1, b2, b3);
-        Set<Skill> requiredSkills = Set.of(Skill.CIVIL_ENGINEER, Skill.ARCHITECT, Skill.SURVEYOR, Skill.ROOFER, Skill.ECONOMIST);
+
+        Map<Skill, Integer> requiredSkills = new HashMap<>();
+        requiredSkills.put(Skill.CIVIL_ENGINEER, 1);
+        requiredSkills.put(Skill.CARPENTER, 2);
+        requiredSkills.put(Skill.ROOFER, 1);
         Brigade bestBrigade = Tender.findCheapestBrigade(brigades, requiredSkills);
 
         assertEquals(b1, bestBrigade);
-
     }
 
     @Test
     void testToString() {
-        Set<Skill> requiredSkills = Set.of(Skill.CIVIL_ENGINEER, Skill.ARCHITECT);
-        Tender tender = new Tender(requiredSkills, "Строительство библиотеки", 10000);
-        String expected = "Tender{skills=" + requiredSkills + ", tenderName='Строительство библиотеки', cost=10000.0}";
+        Map<Skill, Integer> requiredSkills = new HashMap<>();
+        requiredSkills.put(Skill.CIVIL_ENGINEER, 1);
+        requiredSkills.put(Skill.ARCHITECT, 1);
+
+        Tender tender = new Tender(requiredSkills, "Строительство библиотеки");
+        String expected = "Tender{requiredSkills=" + requiredSkills + ", tenderName='Строительство библиотеки'}";
 
         assertEquals(expected, tender.toString());
     }
+
 }

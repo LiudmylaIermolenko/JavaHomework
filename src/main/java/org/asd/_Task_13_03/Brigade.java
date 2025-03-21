@@ -1,8 +1,6 @@
 package org.asd._Task_13_03;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Brigade {
     private double cost;
@@ -21,38 +19,41 @@ public class Brigade {
         return workers;
     }
 
-    // Проверка, соответствует ли бригада требованиям
-    public boolean meetsRequirements(Set<Skill> requiredSkills) {
-        Set<Skill> coveredSkills = new HashSet<>();
+    public boolean meetsRequirements(Map<Skill, Integer> requiredSkills) {
+        Map<Skill, Integer> availableSkills = new HashMap<>();
         Set<Worker> usedWorkers = new HashSet<>();
 
-        for (Skill skill : requiredSkills) {
-            boolean found = false;
+        for (Worker worker : workers) {
+            for (Skill skill : worker.getSkills()) {
+                availableSkills.put(skill, availableSkills.getOrDefault(skill, 0) + 1);
+            }
+        }
+        //проверяем бригады на соответствие требованиям:
+//        System.out.println("Проверяем бригаду: " + this);
+//        System.out.println("Доступные навыки: " + availableSkills);
+//        System.out.println("Требуемые навыки: " + requiredSkills);
+
+        for (Map.Entry<Skill, Integer> entry : requiredSkills.entrySet()) {
+            Skill skill = entry.getKey();
+            int requiredCount = entry.getValue();
+            int assigned = 0;
 
             for (Worker worker : workers) {
                 if (!usedWorkers.contains(worker) && worker.hasSkill(skill)) {
                     usedWorkers.add(worker);
-                    coveredSkills.add(skill);
-                    found = true;
-                    break;
+                    assigned++;
+                    if (assigned == requiredCount) break;
                 }
             }
 
-            if (!found) {
-                return false; // Не нашли работника с этим навыком
+            if (assigned < requiredCount) {
+                return false;
             }
         }
+
         return true;
     }
 
-    //метод для получения всех уникальных навыков бригады
-    public Set<Skill> getAllSkills() {
-        Set<Skill> allSkills = new HashSet<>();
-        for (Worker worker : workers) {
-            allSkills.addAll(worker.getSkills());  // Добавляем навыки каждого работника
-        }
-        return allSkills;
-    }
 
     @Override
     public String toString() {

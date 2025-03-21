@@ -24,16 +24,6 @@ public boolean hasSkill(Skill skill) {
 public Set<Skill> getSkills() {
     return skills;
 }
-//    public Worker(String name) {
-//        this.name = name;
-//    }
-//
-//    public void addSkill(Skill... skillList) {
-//        for (Skill skill : skillList) {
-//            skills.add(skill);
-//        }
-//    }
-
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -48,9 +38,6 @@ public Set<Skill> getSkills() {
 
     @Override
     public String toString() {
-        return "Worker{" +
-                "name='" + name + '\'' +
-                ", skills=" + skills +
-                '}';
+        return "Worker{name='" + name + "', skills=" + skills + "}";
     }
 }
