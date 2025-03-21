@@ -12,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class LimitedArrayListTest {
     private LimitedArrayList<String> list;
     private LimitedArrayList<Integer> list1;
-    //List<Integer> list = new LimitedArrayList<>(15);
 
     @BeforeEach
     void setUp() {
@@ -33,18 +32,12 @@ class LimitedArrayListTest {
     @Test
     void addByIndexTest() {
         List<Integer> expected = List.of(10, 0, 20);
-//        if (index < 0 || index > size) {
-//            throw new InvalidIndexException("Invalid index: " + index);
-//        }
         list1.clear();
         list1.add(0, 0);
         list1.add(0, 10);
         list1.add(2, 20);
 
-        Assertions.assertEquals(expected.size(), list1.size());
-        Assertions.assertEquals(expected.get(0), list1.get(0));
-        Assertions.assertEquals(expected.get(1), list1.get(1));
-        Assertions.assertEquals(expected.get(2), list1.get(2));
+        Assertions.assertEquals(expected, list1);
     }
 
     @Test
@@ -55,6 +48,7 @@ class LimitedArrayListTest {
         list.add("3");
         list.add("4");
         list.add("5");
+
         assertThrows(ListFullException.class, () -> list.add("6"));
     }
 
@@ -71,9 +65,7 @@ class LimitedArrayListTest {
         List<String> expected = new ArrayList<>();
         expected.add("1");
         expected.add(null);
-//        expected.add(null);
-//        List<String> actual = new ArrayList<>();
-//        actual.add(list.get(0));
+
         assertEquals(expected, list);
     }
 
@@ -82,28 +74,24 @@ class LimitedArrayListTest {
         list.add("2");
         String actual = list.get(1);
         String expected = "2";
+
         assertEquals(expected, actual);
     }
 
     @Test
     void testSetElement() {
-        //list.add("1");
         list.set(0, "2");
         List<String> expected = List.of("2");
+
         assertEquals(expected, list);
     }
 
     @Test
     void testRemoveByIndex() {
-        //list.add("1");
         list.add("2");
         list.remove(0);
-
         List<String> expected = List.of("2");
-//        for (int i = 0; i < list.size(); i++) {
-//            actual.add(list.get(i));
-//        }
-//        assertEquals(expected, actual);
+
          assertEquals(expected, list);
     }
 
@@ -111,14 +99,15 @@ class LimitedArrayListTest {
     void testRemoveByObject() {
         list.add("2");
         list.remove("1");
-
         List<String> expected = List.of("2");
+
         assertEquals(expected, list);
     }
 
     @Test
     void testRemoveByIndexWithInvalidIndex() {
         list.add("2");
+
         assertThrows(InvalidIndexException.class, () -> list.remove(2));
     }
 
@@ -126,32 +115,23 @@ class LimitedArrayListTest {
     void testClear() {
         list.add("2");
         list.clear();
+
         assertEquals(0, list.size());
     }
-    //List<Integer> list = new LimitedArrayList<>(10);
-    //        list.add(1);
-    //        list.add(2);
-    //        list.clear();
-    //
-    //        Assertions.assertTrue(list.isEmpty());
-    //        Assertions.assertEquals(0, list.size());
-    //    }
 
     @Test
     void size() {
-        //assertEquals(ожидаемое_значение, фактическое_значение, сообщение_об_ошибке);
-//        assertEquals(0, list.size(), "Список должен быть пустым изначально");
 
-        assertEquals(1, list.size(), "После добавления одного элемента размер должен быть 1");
+        assertEquals(1, list.size());
 
         list.add("element2");
-        assertEquals(2, list.size(), "После добавления второго элемента размер должен быть 2");
+        assertEquals(2, list.size());
 
         list.remove("element2");
-        assertEquals(1, list.size(), "После удаления одного элемента размер должен быть 1");
+        assertEquals(1, list.size());
 
         list.clear(); // Очищаем список
-        assertEquals(0, list.size(), "После очистки списка его размер должен быть 0");
+        assertEquals(0, list.size());
     }
 
     @Test
@@ -159,7 +139,7 @@ class LimitedArrayListTest {
         list.add("element1");
         assertFalse(list.isEmpty(), "После добавления одного элемента список не должен быть пустым");
 
-        list.clear(); // Очищаем список
+        list.clear();
         assertTrue(list.isEmpty(), "После очистки списка он должен быть пустым");
     }
 
@@ -169,12 +149,6 @@ class LimitedArrayListTest {
         assertTrue(list.contains("1"));
         assertFalse(list.contains("3"));
     }
-    //List<Integer> list = new LimitedArrayList<>(10);
-    //        list.add(5);
-    //        list.add(10);
-    //        Assertions.assertTrue(list.contains(5));
-    //        Assertions.assertFalse(list.contains(20));
-    //    }
 
     @Test
     void testIndexOf() {
@@ -189,7 +163,6 @@ class LimitedArrayListTest {
 
     @Test
     void lastIndexOfTest() {
-    //List<String> list = new LimitedArrayList<>(10);
         list.add("apple");
         list.add("banana");
         list.add("apple");
@@ -214,11 +187,6 @@ class LimitedArrayListTest {
         }
         Assertions.assertEquals(expected, result);
     }
-//    private void checkIndex(int index) {
-//        if (index < 0 || index > size) {  // Исправлено на index > size
-//            throw new InvalidIndexException("Invalid index: " + index);
-//        }
-//    }
 
     @Test
     void testToString() {
@@ -237,45 +205,4 @@ class LimitedArrayListTest {
     //    }
     //}
 
-
-
-    @Test
-    void listIterator() {
-    }
-
-    @Test
-    void testListIterator() {
-    }
-
-    @Test
-    void subList() {
-    }
-
-    @Test
-    void toArray() {
-    }
-
-    @Test
-    void testToArray() {
-    }
-
-    @Test
-    void containsAll() {
-    }
-
-    @Test
-    void addAll() {
-    }
-
-    @Test
-    void testAddAll() {
-    }
-
-    @Test
-    void removeAll() {
-    }
-
-    @Test
-    void retainAll() {
-    }
 }
