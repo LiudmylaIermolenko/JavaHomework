@@ -5,40 +5,53 @@ import java.util.*;
 
 public class TaskApp {
     public static void main(String[] args) {
+// 1. Требования для обычной проверки
+        Map<Skill, Integer> requiredSkillsGeneral = new HashMap<>();
+        requiredSkillsGeneral.put(Skill.CIVIL_ENGINEER, 1);
+        requiredSkillsGeneral.put(Skill.CARPENTER, 1);
+        requiredSkillsGeneral.put(Skill.PAINTER_PLASTERER, 1);
 
-        Map<Skill, Integer> requiredSkills = new HashMap<>();
-        requiredSkills.put(Skill.CIVIL_ENGINEER, 1);
-        requiredSkills.put(Skill.CARPENTER, 2);
-        requiredSkills.put(Skill.ROOFER, 1);
+        // 2. Требования для строгой проверки (разные люди для каждого навыка)
+        Map<Skill, Integer> requiredSkillsStrict = new HashMap<>();
+        requiredSkillsStrict.put(Skill.CARPENTER, 1);
+        requiredSkillsStrict.put(Skill.PAINTER_PLASTERER, 1);
+        requiredSkillsStrict.put(Skill.ELECTRICIAN, 1);
 
-        Worker w1 = new Worker("Иван", Skill.CIVIL_ENGINEER);
-        Worker w2 = new Worker("Петр", Skill.CARPENTER);
-        //Worker w2 = new Worker("Петр", Skill.ARCHITECT);
-        Worker w3 = new Worker("Анна", Skill.ROOFER);
-        Worker w4 = new Worker("Мария", Skill.CARPENTER, Skill.ROOFER);
-        Worker w5 = new Worker("Сергей", Skill.ROOFER);
-        Worker w6 = new Worker("Алексей", Skill.ELECTRICIAN);
+//        // Создание рабочих
+//        Worker w1 = new Worker("Рабочий 1", Skill.CIVIL_ENGINEER);
+//        Worker w2 = new Worker("Рабочий 2", Skill.CARPENTER);
+//        Worker w3 = new Worker("Рабочий 3", Skill.PAINTER_PLASTERER);
+        Worker w1 = new Worker("Рабочий 1", Skill.CIVIL_ENGINEER, Skill.CARPENTER, Skill.PAINTER_PLASTERER);
+        Worker w2 = new Worker("Рабочий 2", Skill.PAINTER_PLASTERER);
+        Worker w3 = new Worker("Рабочий 3", Skill.CRANE_OPERATOR);
 
-        Brigade b1 = new Brigade(5000, List.of(w1, w2, w3, w4));
-        Brigade b2 = new Brigade(4500, List.of(w1, w2, w3, w5));
-        Brigade b3 = new Brigade(6000, List.of(w1, w2, w3, w5, w6));
+//        Worker w4 = new Worker("Рабочий 4", Skill.CARPENTER);
+//        Worker w5 = new Worker("Рабочий 5", Skill.PAINTER_PLASTERER);
+//        Worker w6 = new Worker("Рабочий 6", Skill.ELECTRICIAN);
+        Worker w4 = new Worker("Рабочий 4", Skill.CARPENTER, Skill.PAINTER_PLASTERER);
+        Worker w5 = new Worker("Рабочий 5", Skill.CARPENTER, Skill.PAINTER_PLASTERER);
+        Worker w6 = new Worker("Рабочий 6", Skill.CARPENTER, Skill.PAINTER_PLASTERER, Skill.ELECTRICIAN);
 
-        List<Brigade> brigades = List.of(b1, b2, b3);
+        // Создание бригад
+        Brigade b1 = new Brigade(5000, List.of(w1, w2, w3));
+        Brigade b2 = new Brigade(5500, List.of(w4, w5, w6));
 
-        Tender tender = new Tender(requiredSkills, "Строительство библиотеки");
+        List<Brigade> brigades = List.of(b1, b2);
 
+        // Создаем тендер
+        Tender tender = new Tender(requiredSkillsGeneral, "Строительство библиотеки");
 
-//        try {
-//            Brigade cheapestBrigade = Tender.findCheapestBrigade(brigades, requiredSkills);
-//            System.out.println("Тендер: " + tender.getTenderName());
-//            System.out.println("Требуемые навыки: " + tender.getRequiredSkills());
-//            System.out.println("Самая дешевая бригада: " + cheapestBrigade);
-//        } catch (RuntimeException e) {
-//            System.out.println(e.getMessage());
-//        }
         try {
             Brigade bestBrigade = Tender.findCheapestBrigade(brigades, tender.getRequiredSkills());
-            System.out.println("Подходящая бригада: " + bestBrigade);
+            System.out.println("Лучшая бригада по стоимости: " + bestBrigade);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            System.out.println("\n=== Поиск с ограничением (разные люди для каждого навыка) ===");
+            Brigade cheapestBrigadeStrict = Tender.findCheapestBrigadeStrict(brigades, requiredSkillsStrict);
+            System.out.println("Самая дешевая бригада (строгие требования): " + cheapestBrigadeStrict);
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }

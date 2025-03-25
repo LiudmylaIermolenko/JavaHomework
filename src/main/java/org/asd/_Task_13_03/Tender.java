@@ -42,6 +42,27 @@ public class Tender {
     }
 
 
+    public static Brigade findCheapestBrigadeStrict(List<Brigade> brigades, Map<Skill, Integer> requiredSkills) {
+        Brigade cheapestBrigade = null;
+        double minCost = Double.MAX_VALUE;
+
+        for (Brigade brigade : brigades) {
+            if (brigade.meetsRequirementsStrict(requiredSkills)) {  // Вариант 2
+                if (brigade.getCost() < minCost) {
+                    cheapestBrigade = brigade;
+                    minCost = brigade.getCost();
+                }
+            }
+        }
+
+        if (cheapestBrigade == null) {
+            throw new RuntimeException("Нет подходящих бригад, проект закрыт");
+        }
+        return cheapestBrigade;
+    }
+
+
+
     @Override
     public String toString() {
         return "Tender{requiredSkills=" + requiredSkills + ", tenderName='" + tenderName + "'}";
